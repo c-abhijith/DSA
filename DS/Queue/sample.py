@@ -4,7 +4,6 @@ class Queue:
         self.max_size = max_size
     
     def is_empty(self):
-        print(self.item == [])
         return self.item ==[]
     
     def Queue_full(self):
