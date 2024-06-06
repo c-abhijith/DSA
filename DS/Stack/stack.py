@@ -53,3 +53,6 @@ print(obj.peek())                # last value of stack
 print("----- after peek------")
 obj.display_stack()
 
+
+
+
