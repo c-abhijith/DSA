@@ -26,6 +26,9 @@ class Bst:
                 root.right = Node(key)
             else:
                 self._insert_recursively(root.right,key)
+
+
+    def delete(self,key):
     
     def display(self):
         print("inorder--->",self.inorder(self.root))

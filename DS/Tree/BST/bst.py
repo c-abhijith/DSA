@@ -25,6 +25,50 @@ class Bst:
                     return
                 current=current.right
 
+    def delete(self,key):
+        current=self.root
+        parrent = None
+        while current and current.data != key:
+            parrent = current
+            if key < current.data:
+                current = current.left
+            else:
+                current = current.right
+    
+        if current is None:
+            return None
+        
+        if current.left is None and current.right is None:
+            if current == self.root:
+                return None
+            else:
+                if parrent.left == current:
+                    parrent.left=None
+                else:
+                    parrent.right=None
+        elif current.left is None or current.right is None:
+            child = current.right if current.right else current.left
+            if current == self.root:
+                return child
+            else:
+                if parrent.left == current:
+                    parrent.left = child
+                else:
+                    parrent.right = child
+                
+        else:
+            successor_parent = current
+            successor = current.right
+            while  successor and successor.left:
+                successor_parent = successor
+                successor = successor.left
+
+            current.data = successor.data
+
+            if successor_parent == current:
+                successor_parent.right = successor.right
+            else:
+                successor_parent.left = successor.right
     def display(self):
         print("inorder--->",self.inorder(self.root))
         print("preorder-->",self.preorder(self.root))
@@ -90,7 +134,21 @@ class Bst:
                 stack.append(current.left)
         return result
 
+    def find_min(self):
+        current =self.root
+        if current is None:
+            return None
+        while current.left:
+            current=current.left
+        return current.data
     
+    def find_max(self):
+        current = self.root
+        if current is None:
+            return None
+        while current.right:
+            current = current.right
+        return current.data
 
 
 
@@ -105,3 +163,7 @@ bst.insert(3)
 bst.insert(10)
 bst.insert(11)
 bst.display()
+bst.delete(6)
+bst.display()
+print(bst.find_min())
+print(bst.find_max())
